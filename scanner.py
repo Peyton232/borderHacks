@@ -1,6 +1,6 @@
 import requests
 import re
-import urlparse
+import urllib.parse as urlparse
 from bs4 import BeautifulSoup
 
 class Scanner:
@@ -9,7 +9,7 @@ class Scanner:
         self.target_links = []
     def extractLinks(self,url):
         response = requests.get(url)
-        return re.findall('(?:href=")(.*?)"', response.content)
+        return re.findall('(?:href=")(.*?)"', response.content.decode())
     def crawl(self,url=None):
         if url == None:
             url = self.target_url
