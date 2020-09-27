@@ -35,6 +35,24 @@ color: green;
   width: 40%;
 }
 
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.left{
+  display: flex;
+  float: left
+  margin-right: 1%;
+}
+
+.right{
+  display: flex;
+  float: right
+  margin-left: 1%;
+}
 
 
 
