@@ -1,14 +1,9 @@
-#import urllib2
-
 import threading
 import urllib.parse
 import urllib.error
 import urllib.request
 import queue
-#import urllib2
 import urllib
-
-
 
 threads =100
 print("Enter valid target website")
@@ -26,21 +21,21 @@ def build_wordlist(wordlist):
 	filex.close()
 	found = False
 	words = queue.Queue()
-	
+
 	for word in raw:
 		word = word.rstrip()
-		
+
 		if resume is not None:
 			if found:
 				words.put(word)
-				
+
 			else:
 				if word == resume:
 					found = True
 					print("Resumiong wordlist from: %s" %resume)
-		
+
 		else:
-				
+
 			words.put(word)
 	return words
 
@@ -50,7 +45,7 @@ def brute(word_queue,extensions=None):
 	while not word_queue.empty():
 		attempt = word_queue.get()
 		list = []
-		dot = "."	
+		dot = "."
 		if dot not in attempt:
 			list.append("/%s/"%attempt)
 		else:

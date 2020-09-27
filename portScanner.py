@@ -8,19 +8,22 @@ from threading import *
 threads = 300
 que = queue.Queue()
 lock = Lock()
+none = 0
 def scan(port):
-	
+
 	try:
-		Sock = socket.socket()	
+		Sock = socket.socket()
 		Sock.connect((host,port))
 	except:
 		with lock:
-			pass
+			none = 1
+
+
 
 	else:
 		with lock:
-			print(f"{host}:{port} is open")			
-	
+			print(f"{host}:{port} is open")
+
 	finally:
 		Sock.close()
 
@@ -52,16 +55,11 @@ def main(host,ports):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Simple port scanner")
-    parser.add_argument("host", help="Host to scan.")
-    parser.add_argument("--ports", "-p", dest="port_range", default="1-65535", help="Port range to scan, default is 1-65535 (all ports)")
-    args = parser.parse_args()
-    host, port_range = args.host, args.port_range
 
-    start_port, end_port = port_range.split("-")
-    start_port, end_port = int(start_port), int(end_port)
+    host = "192.168.1.47"
 
-    ports = [ p for p in range(start_port, end_port)]
+
+    ports = [ p for p in range(1, 65535)]
 
     main(host, ports)
 
